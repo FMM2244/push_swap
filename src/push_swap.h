@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 04:46:06 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/07 20:20:41 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/09 00:38:02 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdlib.h>
+# include "../includes/libft/libft.h"
 
 
 
