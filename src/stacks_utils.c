@@ -1,44 +1,40 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   stacks_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 04:41:26 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/09 19:04:12 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/11 15:41:11 by fatima            #+#    #+#             */
+/*   Updated: 2025/02/11 22:59:27 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
-#include <stdio.h>
 
-/** 
- * errors to handle: 
- * follow this link 
- * https://42-cursus.gitbook.io/guide/rank-02/push_swap/building-the-thing
-*/
-int	error_handling(char **av)
+/**
+ * sa and sb at the same time.
+**/
+void	ss(t_node *a, t_node *b)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	while (av[i])
-	{
-		j = 0;
-		while (av[i][j])
-			av[i][j++] = 'a';
-		i++;
-	}
-	return (1);
+	sa(a);
+	sb(b);
 }
 
-int	main(int ac, char **av)
+/**
+ * ra and rb at the same time.
+**/
+void	rr(t_node *a_head, t_node *a_tail, t_node *b_head, t_node *b_tail)
 {
-	if (ac == 2)
-	{
-		error_handling(av);
-	}
-	return (0);
+	ra(a_head, a_tail);
+	rb(b_head, b_tail);
+}
+
+/**
+ * rra and rrb at the same time.
+**/
+void	rrr(t_node *a_head, t_node *a_tail, t_node *b_head, t_node *b_tail)
+{
+	rra(a_head, a_tail);
+	rrb(b_head, b_tail);
 }
