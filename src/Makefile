@@ -7,7 +7,7 @@ CFLAGS = -Werror -Wall -Wextra -g
 NAME = push_swap
 LIBFTDIR = ../includes/libft
 LIBFT = ../includes/libft/libft.a
-SRC = push_swap.c
+SRC = push_swap.c stack_a_utils.c stack_b_utils.c stacks_utils.c
 
 OBJ = $(SRC:.c=.o)
 

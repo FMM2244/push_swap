@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:35:12 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/11 23:03:34 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/12 22:15:07 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,7 +31,7 @@ void	sb(t_node *b)
  * Take the first element at the top of a and put it at the top of b.
  * Do nothing if a is empty.
 **/
-t_node	*pb(t_node *b, t_node *a)
+void	pb(t_node *b, t_node *a)
 {
 	t_node	temp;
 
@@ -39,10 +39,10 @@ t_node	*pb(t_node *b, t_node *a)
 		return ;
 	temp.num = a->num;
 	a = a->next;
-	temp.next = &b;
+	temp.next = b;
 	b->pre = &temp;
 	a->pre = NULL;
-	return (&temp);
+	b = &temp;
 }
 
 /**
