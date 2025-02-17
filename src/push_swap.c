@@ -6,13 +6,31 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 04:41:26 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/13 01:40:57 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/17 18:19:21 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 #include <stdio.h>
 
+/**
+ * checks if the array is sorted or not
+ */
+bool	is_sorted(t_node *stack)
+{
+	while (stack->next)
+	{
+		if (stack->num > stack->next->num)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
+}
+
+/**
+ * prints "Error\n" on the standered error and exits the program
+ * with status 0
+ */
 void	print_error(void)
 {
 	ft_putendl_fd("Error", 2);
@@ -22,8 +40,8 @@ void	print_error(void)
 /** 
  * errors to handle: 
  * follow this link 
- * https://42-cursus.gitbook.io/guide/rank-02/push_swap/building-the-thing
-*/
+ * such as having non-digits in the input
+ */
 void	error_handling(char **av)
 {
 	int	i;
@@ -46,6 +64,9 @@ void	error_handling(char **av)
 	}
 }
 
+/**
+ * creates a new node
+ */
 void	*new_node(int contents)
 {
 	t_node	*new;
@@ -59,50 +80,62 @@ void	*new_node(int contents)
 	return (new);
 }
 
-int	stack_a_init(t_node **head, t_node *tail, int ac, char **av)
+/**
+ * handel duplicate inputs
+ */
+void	are_there_duplicates(t_stack *stacks)
 {
-	long	temp;
-	t_node	*node;
-	t_node	*prev_node;
+	t_node	*temp1;
+	t_node	*temp2;
 
-	prev_node = NULL;
-	temp = ft_atoi(av[--ac]);
-	if (temp > INT_MAX || temp < INT_MIN)
-		print_error();
-	tail->num = temp;
-	prev_node = tail;
-	while (--ac)
+	temp1 = stacks->a_head;
+	while (temp1)
 	{
-		temp = ft_atoi(av[ac]);
-		if (temp > INT_MAX || temp < INT_MIN)
-			print_error();
-
-		node = new_node(temp);
-		node->next = prev_node;
-		prev_node->pre = node;
-		prev_node = node;
+		temp2 = temp1->next;
+		while (temp2)
+		{
+			if (temp1->num == temp2->num)
+			{
+				// free_stacks(stacks);
+				print_error();
+			}
+			temp2 = temp2->next;
+		}
+		temp1 = temp1->next;
 	}
-	*head = node;
-	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	t_node	*a_head;
-	t_node	*a_tail;
-	// t_node	*b_head;
-	// t_node	*b_tail;
+	t_stack	stack;
 
-	a_head = new_node(0);
-	a_tail = new_node(0);
-	if (ac == 1)
+	if (ac <= 2)
 		return (0);
+	stack.a_head = new_node(0);
+	stack.a_tail = new_node(0);
+	stack.b_head = NULL;
+	stack.b_tail = NULL;
 	error_handling(av);
-	stack_a_init(&a_head, a_tail, ac, av);
-	while (a_head)
+	stack_a_init(&stack, ac, av);
+	are_there_duplicates(&stack);
+	if (ac <= 6)
+		less_than_seven(&stack, ac - 1);
+	// else
+	// 	radix(&stack);
+	printf("\n");
+	while (stack.a_head)
 	{
-		printf("%d\n", a_head->num);
-		a_head = a_head->next;
+		printf("\t%d", stack.a_head->num);
+		stack.a_head = stack.a_head->next;
 	}
+	printf("\n");
 	return (0);
 }
+
+// while (stack.b_head)
+// {
+// 	printf("\t%d", stack.b_head->num);
+// 	stack.b_head = stack.b_head->next;
+// }
+// free(a_head);
+// free(a_tail);

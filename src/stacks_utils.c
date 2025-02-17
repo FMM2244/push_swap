@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:41:11 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/11 22:59:27 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/17 12:43:42 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -24,17 +24,17 @@ void	ss(t_node *a, t_node *b)
 /**
  * ra and rb at the same time.
 **/
-void	rr(t_node *a_head, t_node *a_tail, t_node *b_head, t_node *b_tail)
+void	rr(t_stack *stacks)
 {
-	ra(a_head, a_tail);
-	rb(b_head, b_tail);
+	ra(&stacks->a_head, &stacks->a_tail);
+	rb(&stacks->b_head, &stacks->b_tail);
 }
 
 /**
  * rra and rrb at the same time.
 **/
-void	rrr(t_node *a_head, t_node *a_tail, t_node *b_head, t_node *b_tail)
+void	rrr(t_stack *stacks)
 {
-	rra(a_head, a_tail);
-	rrb(b_head, b_tail);
+	rra(&stacks->a_head, &stacks->a_tail);
+	rrb(&stacks->b_head, &stacks->b_tail);
 }
