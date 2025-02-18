@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:06:24 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 03:05:33 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 14:00:00 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,18 +15,20 @@
 /**
  * finds minimum value in the stack
  */
-int	find_min(t_node *a_head)
+int	find_min(t_node *a_head, int *minimum)
 {
-	int	minimum;
+	int	index;
 
-	minimum = a_head->num;
+	*minimum = a_head->num;
+	index = 0;
 	while (a_head)
 	{
-		if (a_head->num < minimum)
-			minimum = a_head->num;
+		if (a_head->num < *minimum)
+			*minimum = a_head->num;
 		a_head = a_head->next;
+		index++;
 	}
-	return (minimum);
+	return (index);
 }
 
 /**
@@ -74,19 +76,24 @@ void	handle_three_items(t_stack *stacks)
  */
 void	hendle_four_to_six_items(t_stack *stacks)
 {
-	int	minimum;
+	int	*minimum;
+	int	index;
 
+	minimum = (int *)malloc(sizeof(int));
 	while (get_stack_size(stacks->a_head) != 3)
 	{
-		minimum = find_min(stacks->a_head);
-		if (minimum == stacks->a_head->num)
+		index = find_min(stacks->a_head, minimum);
+		if (*minimum == stacks->a_head->num)
 			pb(stacks);
-		else
+		else if (index < get_stack_size(stacks->a_head) / 2)
 			ra(&stacks->a_head, &stacks->a_tail);
+		else
+			rra(&stacks->a_head, &stacks->a_tail);
 	}
 	handle_three_items(stacks);
 	while (stacks->b_head)
-		pa(stacks);
+		pa(&stacks->a_head, &stacks->b_head);
+	free(minimum);
 }
 
 /**

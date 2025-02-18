@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:35:12 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/17 12:44:07 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 13:53:52 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,7 +32,7 @@ void	sb(t_node *b)
  * Take the first element at the top of a and put it at the top of b.
  * Do nothing if a is empty.
 **/
-void	pb(t_stack *stack)
+void	pb(t_node **b_head, t_node **b_tail)
 {
 	t_node	*temp;
 

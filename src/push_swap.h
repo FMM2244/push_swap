@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 04:46:06 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 00:31:55 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 13:59:39 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -24,6 +24,7 @@
 typedef struct s_node
 {
 	int				num;
+	int				index;
 	struct s_node	*next;
 	struct s_node	*pre;
 }	t_node;
@@ -40,7 +41,7 @@ typedef struct s_stack
 void	sa(t_node *a);
 void	ra(t_node **a_head, t_node **a_tail);
 void	rra(t_node **a_head, t_node **a_tail);
-void	pa(t_stack *stacks);
+void	pa(t_node **a_head, t_node **b_head);
 void	sb(t_node *b);
 void	rb(t_node **b_head, t_node **b_tail);
 void	rrb(t_node **b_head, t_node **b_tail);
@@ -56,5 +57,6 @@ void	handle_three_items(t_stack *stacks);
 void	radix(t_stack *stacks);
 bool	is_sorted(t_node *stack);
 int		get_stack_size(t_node *head);
+int		find_min(t_node *a_head, int *minimum);
 
 #endif

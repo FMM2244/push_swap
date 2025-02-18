@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:33:48 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 02:53:08 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 14:05:33 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -15,7 +15,7 @@
 /**
  * Swap the first 2 elements at the top of stack a.
  * Do nothing if there is only one or no elements.
-**/
+ */
 void	sa(t_node *a)
 {
 	int	temp;
@@ -23,6 +23,7 @@ void	sa(t_node *a)
 	if (!a || !a->next)
 		return ;
 	temp = a->num;
+	
 	a->num = a->next->num;
 	a->next->num = temp;
 	ft_putendl_fd("sa", 1);
@@ -31,25 +32,25 @@ void	sa(t_node *a)
 /**
  * Take the first element at the top of b and put it at the top of a.
  * Do nothing if b is empty.
-**/
-void	pa(t_stack *stacks)
+ */
+void	pa(t_node **a_head, t_node **b_head)
 {
 	t_node	*temp;
 
-	if (!stacks->b_head)
+	if (!b_head)
 		return ;
-	temp = stacks->b_head;
-	stacks->b_head = stacks->b_head->next;
-	temp->next = stacks->a_head;
-	stacks->a_head->pre = temp;
-	stacks->a_head = temp;
+	temp = *b_head;
+	*b_head = (*b_head)->next;
+	temp->next = *a_head;
+	(*a_head)->pre = temp;
+	*a_head = temp;
 	ft_putendl_fd("pa", 1);
 }
 
 /**
  * Shift up all elements of stack a by 1.
  * The first element becomes the last one.
-**/
+ */
 void	ra(t_node **a_head, t_node **a_tail)
 {
 	if (!a_head || !(*a_head)->next)
@@ -66,7 +67,7 @@ void	ra(t_node **a_head, t_node **a_tail)
 /**
  * Shift down all elements of stack a by 1.
  * The last element becomes the first one.
-**/
+ */
 void	rra(t_node **a_head, t_node **a_tail)
 {
 	if (!a_head || !(*a_head)->next)
