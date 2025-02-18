@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:33:48 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/17 11:47:04 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 02:53:08 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -36,25 +36,13 @@ void	pa(t_stack *stacks)
 {
 	t_node	*temp;
 
-	if (!stacks->a_head)
-		return ;
 	if (!stacks->b_head)
-	{
-		stacks->a_head = stacks->a_head;
-		stacks->b_head = stacks->b_head->next;
-		stacks->a_head->next = NULL;
-		stacks->a_head->pre = NULL;
-		stacks->a_tail = stacks->a_head;
-	}
-	else
-	{
-		temp = stacks->b_head;
-		stacks->b_head = stacks->b_head->next;
-		stacks->b_head->pre = NULL;
-		temp->next = stacks->a_head;
-		stacks->a_head->pre = temp;
-		stacks->a_head = temp;
-	}
+		return ;
+	temp = stacks->b_head;
+	stacks->b_head = stacks->b_head->next;
+	temp->next = stacks->a_head;
+	stacks->a_head->pre = temp;
+	stacks->a_head = temp;
 	ft_putendl_fd("pa", 1);
 }
 

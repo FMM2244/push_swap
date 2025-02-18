@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 04:46:06 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/17 18:17:13 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 00:31:55 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include "../includes/libft/libft.h"
 
 typedef struct s_node
@@ -54,5 +55,6 @@ void	less_than_seven(t_stack *stacks, int length);
 void	handle_three_items(t_stack *stacks);
 void	radix(t_stack *stacks);
 bool	is_sorted(t_node *stack);
+int		get_stack_size(t_node *head);
 
 #endif

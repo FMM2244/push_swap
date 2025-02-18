@@ -6,12 +6,15 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:06:24 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/17 18:31:58 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 03:05:33 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "push_swap.h"
 
+/**
+ * finds minimum value in the stack
+ */
 int	find_min(t_node *a_head)
 {
 	int	minimum;
@@ -66,13 +69,25 @@ void	handle_three_items(t_stack *stacks)
 		ra(&stacks->a_head, &stacks->a_tail);
 }
 
+/**
+ * this function is self explanitory
+ */
 void	hendle_four_to_six_items(t_stack *stacks)
 {
 	int	minimum;
 
-	minimum = find_min(stacks->a_head);
+	while (get_stack_size(stacks->a_head) != 3)
+	{
+		minimum = find_min(stacks->a_head);
+		if (minimum == stacks->a_head->num)
+			pb(stacks);
+		else
+			ra(&stacks->a_head, &stacks->a_tail);
+	}
+	handle_three_items(stacks);
+	while (stacks->b_head)
+		pa(stacks);
 }
-// work on making min the last item on stack a and then
 
 /**
  * calls the appropriate function
@@ -80,5 +95,10 @@ void	hendle_four_to_six_items(t_stack *stacks)
  */
 void	less_than_seven(t_stack *stacks, int length)
 {
-	
+	if (length == 2)
+		handle_two_items(stacks);
+	else if (length == 3)
+		handle_three_items(stacks);
+	else
+		hendle_four_to_six_items(stacks);
 }

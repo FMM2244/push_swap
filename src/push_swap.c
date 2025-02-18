@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 04:41:26 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/17 18:19:21 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 02:53:40 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -118,17 +118,24 @@ int	main(int ac, char **av)
 	error_handling(av);
 	stack_a_init(&stack, ac, av);
 	are_there_duplicates(&stack);
-	if (ac <= 6)
+	int l = get_stack_size(stack.a_head);
+	(void)l;
+	if (ac <= 7)
 		less_than_seven(&stack, ac - 1);
 	// else
 	// 	radix(&stack);
-	printf("\n");
-	while (stack.a_head)
-	{
-		printf("\t%d", stack.a_head->num);
-		stack.a_head = stack.a_head->next;
-	}
-	printf("\n");
+	// printf("%d\n", l);
+	// while (stack.a_head)
+	// {
+	// 	printf("\t%d", stack.a_head->num);
+	// 	stack.a_head = stack.a_head->next;
+	// }
+	// printf("\n");
+	// while (stack.b_head)
+	// {
+	// 	printf("\t%d", stack.b_head->num);
+	// 	stack.b_head = stack.b_head->next;
+	// }
 	return (0);
 }
 
