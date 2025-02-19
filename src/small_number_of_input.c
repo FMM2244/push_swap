@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:06:24 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 14:00:00 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/18 15:45:27 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -84,7 +84,7 @@ void	hendle_four_to_six_items(t_stack *stacks)
 	{
 		index = find_min(stacks->a_head, minimum);
 		if (*minimum == stacks->a_head->num)
-			pb(stacks);
+			pb(&stacks->b_head, &stacks->a_head);
 		else if (index < get_stack_size(stacks->a_head) / 2)
 			ra(&stacks->a_head, &stacks->a_tail);
 		else

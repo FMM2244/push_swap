@@ -6,7 +6,7 @@
 /*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 04:41:26 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 11:53:06 by fatima           ###   ########.fr       */
+/*   Updated: 2025/02/19 09:50:26 by fatima           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,9 +37,9 @@ void	print_error(void)
 	exit(0);
 }
 
-/** 
- * errors to handle: 
- * follow this link 
+/**
+ * errors to handle:
+ * follow this link
  * such as having non-digits in the input
  */
 void	error_handling(char **av)
@@ -67,17 +67,14 @@ void	error_handling(char **av)
 /**
  * creates a new node
  */
-void	*new_node(int contents)
+void	new_node(int contents, t_node **new)
 {
-	t_node	*new;
-
-	new = (t_node *)malloc(sizeof(t_node));
+	*new = (t_node *)malloc(sizeof(t_node));
 	if (new == NULL)
-		return (NULL);
-	new->num = contents;
-	new->next = NULL;
-	new->pre = NULL;
-	return (new);
+		return ;
+	(*new)->num = contents;
+	(*new)->next = NULL;
+	(*new)->pre = NULL;
 }
 
 /**
@@ -95,10 +92,7 @@ void	are_there_duplicates(t_stack *stacks)
 		while (temp2)
 		{
 			if (temp1->num == temp2->num)
-			{
-				// free_stacks(stacks);
 				print_error();
-			}
 			temp2 = temp2->next;
 		}
 		temp1 = temp1->next;
@@ -111,41 +105,16 @@ int	main(int ac, char **av)
 
 	if (ac <= 2)
 		return (0);
-	stack.a_head = new_node(0);
-	stack.a_tail = new_node(0);
 	stack.b_head = NULL;
 	stack.b_tail = NULL;
 	error_handling(av);
 	stack_a_init(&stack, ac, av);
 	are_there_duplicates(&stack);
-	// int l = get_stack_size(stack.a_head);
-	printf("ac = %d\n", ac);
+	set_index(&stack);
 	if (ac <= 7)
 		less_than_seven(&stack, ac - 1);
 	else
-	{
-		printf("calling radix\n");
 		radix(&stack);
-	}
-	// printf("%d\n", l);
-	// while (stack.a_head)
-	// {
-	// 	printf("\t%d", stack.a_head->num);
-	// 	stack.a_head = stack.a_head->next;
-	// }
-	// printf("\n");
-	// while (stack.b_head)
-	// {
-	// 	printf("\t%d", stack.b_head->num);
-	// 	stack.b_head = stack.b_head->next;
-	// }
+	free_all(&stack);
 	return (0);
 }
-
-// while (stack.b_head)
-// {
-// 	printf("\t%d", stack.b_head->num);
-// 	stack.b_head = stack.b_head->next;
-// }
-// free(a_head);
-// free(a_tail);
