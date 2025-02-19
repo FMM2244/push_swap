@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   stacks_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmaaita <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 15:41:11 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/17 12:43:42 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/19 13:43:52 by fmaaita           #+#    #+#             */
+/*   Updated: 2025/02/19 13:43:54 by fmaaita          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -33,8 +33,48 @@ void	rr(t_stack *stacks)
 /**
  * rra and rrb at the same time.
 **/
-void	rrr(t_stack *stacks)
+// void	rrr(t_stack *stacks)
+// {
+// 	rra(&stacks->a_head, &stacks->a_tail);
+// 	rrb(&stacks->b_head, &stacks->b_tail);
+// }
+
+void	pa_helper(t_stack *stack, t_node *temp)
 {
-	rra(&stacks->a_head, &stacks->a_tail);
-	rrb(&stacks->b_head, &stacks->b_tail);
+	if (stack->a_head == stack->a_tail)
+	{
+		temp->next = stack->a_tail;
+		stack->a_tail->pre = temp;
+		stack->a_head = temp;
+	}
+	else
+	{
+		stack->a_head->pre = temp;
+		temp->next = stack->a_head;
+		stack->a_head = temp;
+	}
+}
+
+void	stack_init_helper(t_stack *stacks)
+{
+	new_node(0, &stacks->a_head);
+	stacks->a_tail = stacks->a_head;
+	if (!stacks->a_head || !stacks->a_tail)
+		return ;
+}
+
+void	pb_helper(t_stack *stack, t_node *temp)
+{
+	if (stack->b_head == stack->b_tail)
+	{
+		temp->next = stack->b_tail;
+		stack->b_tail->pre = temp;
+		stack->b_head = temp;
+	}
+	else
+	{
+		stack->b_head->pre = temp;
+		temp->next = stack->b_head;
+		stack->b_head = temp;
+	}
 }

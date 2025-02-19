@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmaaita <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 04:41:26 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/19 09:50:26 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/19 13:40:04 by fmaaita           #+#    #+#             */
+/*   Updated: 2025/02/19 13:40:06 by fmaaita          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
@@ -25,16 +25,6 @@ bool	is_sorted(t_node *stack)
 		stack = stack->next;
 	}
 	return (true);
-}
-
-/**
- * prints "Error\n" on the standered error and exits the program
- * with status 0
- */
-void	print_error(void)
-{
-	ft_putendl_fd("Error", 2);
-	exit(0);
 }
 
 /**
@@ -56,11 +46,11 @@ void	error_handling(char **av)
 			if (j == 0 && (av[i][j] == '-' || av[i][j] == '+'))
 				j++;
 			if (av[i][j] < '0' || av[i][j] > '9')
-				print_error();
+				print_error(NULL);
 			j++;
 		}
 		if (j > 11)
-			print_error();
+			print_error(NULL);
 	}
 }
 
@@ -92,7 +82,7 @@ void	are_there_duplicates(t_stack *stacks)
 		while (temp2)
 		{
 			if (temp1->num == temp2->num)
-				print_error();
+				print_error(stacks);
 			temp2 = temp2->next;
 		}
 		temp1 = temp1->next;
@@ -110,11 +100,14 @@ int	main(int ac, char **av)
 	error_handling(av);
 	stack_a_init(&stack, ac, av);
 	are_there_duplicates(&stack);
-	set_index(&stack);
-	if (ac <= 7)
-		less_than_seven(&stack, ac - 1);
-	else
-		radix(&stack);
+	if (!is_sorted(stack.a_head))
+	{
+		set_index(&stack);
+		if (ac <= 6)
+			less_than_seven(&stack, ac - 1);
+		else
+			radix(&stack);
+	}
 	free_all(&stack);
 	return (0);
 }

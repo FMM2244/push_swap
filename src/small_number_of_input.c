@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   small_number_of_input.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmaaita <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 00:06:24 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 15:45:27 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/19 13:42:43 by fmaaita           #+#    #+#             */
+/*   Updated: 2025/02/19 13:42:47 by fmaaita          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -84,7 +84,7 @@ void	hendle_four_to_six_items(t_stack *stacks)
 	{
 		index = find_min(stacks->a_head, minimum);
 		if (*minimum == stacks->a_head->num)
-			pb(&stacks->b_head, &stacks->a_head);
+			pb(stacks);
 		else if (index < get_stack_size(stacks->a_head) / 2)
 			ra(&stacks->a_head, &stacks->a_tail);
 		else
@@ -92,7 +92,7 @@ void	hendle_four_to_six_items(t_stack *stacks)
 	}
 	handle_three_items(stacks);
 	while (stacks->b_head)
-		pa(&stacks->a_head, &stacks->b_head);
+		pa(stacks);
 	free(minimum);
 }
 

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   stack_b_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmaaita <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 11:35:12 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/18 18:27:28 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/19 13:43:27 by fmaaita           #+#    #+#             */
+/*   Updated: 2025/02/19 13:43:29 by fmaaita          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -38,40 +38,24 @@ void	pb(t_stack *stack)
 
 	if (!stack->a_head)
 		return ;
-
 	temp = stack->a_head;
-
 	stack->a_head = stack->a_head->next;
-
-	if(stack->a_head)
-	    stack->a_head->pre = NULL;
-
-
+	if (stack->a_head)
+		stack->a_head->pre = NULL;
 	temp->pre = NULL;
 	temp->next = NULL;
-
-	if(stack->b_head){
-		if(stack->b_head == stack->b_tail){
-			temp->next = stack->b_tail;
-			stack->b_tail->pre = temp;
-			stack->b_head = temp;
-		} else {
-			stack->b_head->pre = temp;
-			temp->next = stack->b_head;
-			stack->b_head = temp;
-		}
-	} else {
+	if (stack->b_head)
+		pb_helper(stack, temp);
+	else
+	{
 		stack->b_head = temp;
 		stack->b_tail = temp;
 	}
-
 	ft_putendl_fd("pb", 1);
 }
 
-/**
- * Shift up all elements of stack b by 1.
- * The first element becomes the last one.
-**/
+// Shift up all elements of stack b by 1.
+// The first element becomes the last one.
 void	rb(t_node **b_head, t_node **b_tail)
 {
 	if (!b_head || !(*b_head)->next)

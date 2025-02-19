@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmaaita <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 03:42:14 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/19 10:22:36 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/19 13:40:27 by fmaaita           #+#    #+#             */
+/*   Updated: 2025/02/19 13:40:33 by fmaaita          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -34,19 +34,14 @@ int	find_next_min(t_node *head, int previous_min)
  */
 void	set_index(t_stack *stacks)
 {
-	u_int	index;
-	int		previous_min;
-	t_node	*temp1;
-	t_node	*temp2;
+	int				previous_min;
+	t_node			*temp1;
+	t_node			*temp2;
+	unsigned int	index;
 
 	find_min(stacks->a_head, &previous_min);
 	temp1 = stacks->a_head;
-	while (temp1)
-	{
-		temp1->index = 0;
-		temp1 = temp1->next;
-	}
-	temp1 = stacks->a_head;
+	index = 0;
 	while (temp1)
 	{
 		temp2 = stacks->a_head;
@@ -90,21 +85,14 @@ void	radix(t_stack *stacks)
 {
 	int	i;
 	int	size;
-	int x;
-	int y;
 
 	i = 0;
 	while (i < 32)
 	{
 		size = get_stack_size(stacks->a_head);
-		while (--size)
+		while (size--)
 		{
-			x = stacks->a_head->index >> i;
-			y = (x & 1);
-
-			// printf("%d", y);
-			
-			if (!y)
+			if ((stacks->a_head->index >> i & 1) == 0)
 				pb(stacks);
 			else
 				ra(&stacks->a_head, &stacks->a_tail);

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   stack_a_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatima <fatima@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fmaaita <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 23:33:48 by fatima            #+#    #+#             */
-/*   Updated: 2025/02/19 10:27:52 by fatima           ###   ########.fr       */
+/*   Created: 2025/02/19 13:41:21 by fmaaita           #+#    #+#             */
+/*   Updated: 2025/02/19 13:41:24 by fmaaita          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -25,7 +25,6 @@ void	sa(t_node *a)
 	temp = a->num;
 	a->num = a->next->num;
 	a->next->num = temp;
-	
 	temp = a->index;
 	a->index = a->next->index;
 	a->next->index = temp;
@@ -38,50 +37,23 @@ void	sa(t_node *a)
  */
 void	pa(t_stack *stack)
 {
-	/* t_node	*temp; */
-	/**/
-	/* if (!(*b_head) || !b_head) */
-	/* 	return ; */
-	/* temp = *b_head; */
-	/**/
-	/* *b_head = (*b_head)->next; */
-	/* (*b_head)->pre = NULL; */
-	/**/
-	/* temp->next = *a_head; */
-	/* (*a_head)->pre = temp; */
-	/* *a_head = temp; */
-	/* ft_putendl_fd("pa", 1); */
-
 	t_node	*temp;
 
 	if (!stack->b_head)
 		return ;
-
 	temp = stack->b_head;
-
 	stack->b_head = stack->b_head->next;
-	if(stack->b_head)
-	    stack->b_head->pre = NULL;
-
-
+	if (stack->b_head)
+		stack->b_head->pre = NULL;
 	temp->pre = NULL;
 	temp->next = NULL;
-
-	if(stack->a_head){
-		if(stack->a_head == stack->a_tail){
-			temp->next = stack->a_tail;
-			stack->a_tail->pre = temp;
-			stack->a_head = temp;
-		} else {
-			stack->a_head->pre = temp;
-			temp->next = stack->a_head;
-			stack->a_head = temp;
-		}
-	} else {
+	if (stack->a_head)
+		pa_helper(stack, temp);
+	else
+	{
 		stack->a_head = temp;
 		stack->a_tail = temp;
 	}
-
 	ft_putendl_fd("pa", 1);
 }
 
@@ -133,21 +105,18 @@ void	stack_a_init(t_stack *stacks, int ac, char **av)
 	t_node	*node;
 	t_node	*prev_node;
 
-	new_node(0, &stacks->a_head);
-	stacks->a_tail = stacks->a_head;
-	if (!stacks->a_head || !stacks->a_tail)
-		return ;
+	stack_init_helper(stacks);
 	prev_node = NULL;
 	temp = ft_atoi(av[--ac]);
 	if (temp > INT_MAX || temp < INT_MIN)
-		print_error();
+		print_error(stacks);
 	stacks->a_tail->num = temp;
 	prev_node = stacks->a_tail;
 	while (--ac)
 	{
 		temp = ft_atoi(av[ac]);
 		if (temp > INT_MAX || temp < INT_MIN)
-			print_error();
+			print_error(stacks);
 		node = NULL;
 		new_node(temp, &node);
 		node->next = prev_node;
