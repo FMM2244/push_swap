@@ -18,15 +18,20 @@
 int	find_min(t_node *a_head, int *minimum)
 {
 	int	index;
+	int	i;
 
 	*minimum = a_head->num;
 	index = 0;
+	i = 0;
 	while (a_head)
 	{
 		if (a_head->num < *minimum)
+		{
 			*minimum = a_head->num;
+			index = i;
+		}
+		i++;
 		a_head = a_head->next;
-		index++;
 	}
 	return (index);
 }
@@ -76,16 +81,15 @@ void	handle_three_items(t_stack *stacks)
  */
 void	hendle_four_to_six_items(t_stack *stacks)
 {
-	int	*minimum;
+	int	minimum;
 	int	index;
 
-	minimum = (int *)malloc(sizeof(int));
 	while (get_stack_size(stacks->a_head) != 3)
 	{
-		index = find_min(stacks->a_head, minimum);
-		if (*minimum == stacks->a_head->num)
+		index = find_min(stacks->a_head, &minimum);
+		if (minimum == stacks->a_head->num)
 			pb(stacks);
-		else if (index < get_stack_size(stacks->a_head) / 2)
+		else if (index <= get_stack_size(stacks->a_head) / 2)
 			ra(&stacks->a_head, &stacks->a_tail);
 		else
 			rra(&stacks->a_head, &stacks->a_tail);
@@ -93,7 +97,6 @@ void	hendle_four_to_six_items(t_stack *stacks)
 	handle_three_items(stacks);
 	while (stacks->b_head)
 		pa(stacks);
-	free(minimum);
 }
 
 /**

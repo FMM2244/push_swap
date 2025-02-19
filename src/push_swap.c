@@ -93,11 +93,13 @@ int	main(int ac, char **av)
 {
 	t_stack	stack;
 
-	if (ac <= 2)
+	if (ac == 1)
 		return (0);
 	stack.b_head = NULL;
 	stack.b_tail = NULL;
 	error_handling(av);
+	if (ac == 2)
+		return (0);
 	stack_a_init(&stack, ac, av);
 	are_there_duplicates(&stack);
 	if (!is_sorted(stack.a_head))
